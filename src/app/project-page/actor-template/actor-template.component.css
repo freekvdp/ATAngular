@@ -1,0 +1,15 @@
+.pp-actorTemplate{
+  width: 300px;
+  min-height: 150px;
+  background-color:white;
+  margin: 20px;
+  padding:0;
+  box-shadow: 5px 5px 25px #323a45;
+}
+.profile-container:hover .profile-name {
+  color:white;
+  text-shadow: -1px 0 #323a45, 0 1px #323a45, 1px 0 #323a45, 0 -1px #323a45;
+}
+.content {
+  padding:0 10px 0 10px;
+}

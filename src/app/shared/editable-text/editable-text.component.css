@@ -1,0 +1,38 @@
+.editable-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.editable-content {
+  width:100%;
+  min-height: 30px;
+  max-height: 100px;
+  padding:5px;
+  border:1px groove transparent;
+  outline:0;
+  transition: .5s;
+  resize:none;
+  overflow: auto;
+}
+.editcontent {
+  border-color:#323a45;
+  min-height: 100px;
+}
+.change-button {
+  width:50px;
+  height: 50px;
+  font-size:1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:#14b9d6;
+}
+.change-button a {
+  cursor:pointer;
+}
+.fa-check-circle-o:hover{
+  color:#1fbba6;
+}
+.fa-pencil:hover{
+  color:#f27935;
+}

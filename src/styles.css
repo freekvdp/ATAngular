@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+html body {
+  font-family: 'Signika', sans-serif;
+  /*background-color: #eaedf1;*/
+  background: url("assets/Background/bg.jpg") no-repeat left top fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.ata-title {
+  text-align: center;
+  background-color: #323a45;
+  color:white;
+  margin:0;
+  padding:15px 0 10px 0;
+}
+.profiles-container {
+  display:flex;
+  margin: 0 10px 0 10px;
+}
+.profile-container {
+  width: 90px;
+  text-align: center;
+  cursor: pointer;
+}
+.profile-container img {
+  height: 80px;
+  border-radius: 50%;
+  border:2px solid #323a45;
+}
+.profile-name {
+  color: transparent;
+  position: relative;
+  top:-25px;
+  transition-duration: .3s;
+}
+.list-container {
+  margin-left:50px !important;
+  margin-right:50px !important;
+  /*width:90%;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-between;*/
+}
+.contentFound{
+  height:100px;
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*font-style: italic;*/
+  color: #323a45;
+}
+.contentNotfound {
+  height:100px;
+  display: flex;
+  align-items: center;
+  font-style: italic;
+  color: #323a45;
+}

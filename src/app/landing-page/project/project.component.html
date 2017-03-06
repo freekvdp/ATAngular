@@ -1,0 +1,37 @@
+<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 lp-project">
+  <div class="projectcontent">
+    <h2 class="ata-title">{{project.name}}</h2>
+    <h4>Analisten</h4>
+    <div class="profiles-container">
+      <a *ngFor="let analist of analists" class="profile-container" (click)="sidebar.openSidebar(analist)">
+        <div class="profileimg-container">
+          <img alt="profilepic" [src]="analist.photo_url">
+        </div>
+        <span class="profile-name">{{analist.name}}</span>
+      </a>
+      <div *ngIf="!analists.length" class="contentNotfound">
+        <span>Geen Analist toegevoegd.</span>
+      </div>
+    </div>
+    <h4>Teamleden</h4>
+    <div class="profiles-container">
+      <a *ngFor="let member of members" class="profile-container" (click)="sidebar.openSidebar(member)">
+        <div class="profileimg-container">
+          <img alt="profilepic" [src]="member.photo_url">
+        </div>
+        <span class="profile-name">{{member.name}}</span>
+      </a>
+      <div *ngIf="!members.length" class="contentNotfound">
+        <span>Geen Teamlid toegevoegd</span>
+      </div>
+    </div>
+    <div class="button-container">
+      <button class="projectbutton" id="detailbutton" (click)="navigate()">
+        Details
+      </button>
+      <button [disabled]="false" class="projectbutton" id="editbutton">
+        Edit
+      </button>
+    </div>
+  </div>
+</div>

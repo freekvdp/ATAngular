@@ -1,0 +1,57 @@
+<div id="mySidenav" class="sidenav" [ngClass]="sidebarClass">
+  <a class="closebtn" (click)="closeSideBar()">&times;</a>
+  <div class="profile-sidebar">
+    <!-- SIDEBAR USERPIC -->
+    <div class="profile-userpic">
+      <img [src]="person?.photo_url" class="" alt="">
+    </div>
+    <!-- END SIDEBAR USERPIC -->
+    <!-- SIDEBAR USER TITLE -->
+    <div class="profile-usertitle">
+      <div class="profile-usertitle-name">
+        {{person?.name}}
+      </div>
+      <div class="profile-usertitle-job">
+        {{person?.position}}
+      </div>
+    </div>
+    <!-- END SIDEBAR USER TITLE -->
+    <!-- SIDEBAR BUTTONS -->
+    <!--<div class="profile-userbuttons">
+      <button type="button" class="btn btn-success btn-sm">Follow</button>
+      <button type="button" class="btn btn-danger btn-sm">Message</button>
+    </div>-->
+    <!-- END SIDEBAR BUTTONS -->
+    <!-- SIDEBAR MENU -->
+    <div class="profile-usermenu">
+      <ul class="nav">
+        <li *ngIf="person?.surname">
+          <span>
+            <i class="fa fa-user fa-lg"></i>
+            {{person?.showname}}</span>
+        </li>
+        <li>
+          <span>
+            <i class="fa fa fa-envelope-o fa-lg"></i>
+            {{person?.email}}</span>
+        </li>
+        <li *ngIf="person?.phone">
+          <span>
+            <i class="fa fa-phone fa-lg"></i>
+            {{person?.phone}}</span>
+        </li>
+        <li *ngIf="person?.annotation">
+          <span>
+            <i class="fa fa-sticky-note-o fa-lg"></i>
+            {{person?.annotation}}</span>
+        </li>
+        <li *ngIf="person?.notes">
+          <span>
+            <i class="fa fa-sticky-note-o fa-lg"></i>
+            {{person?.notes}}</span>
+        </li>
+      </ul>
+    </div>
+    <!-- END MENU -->
+  </div>
+</div>
