@@ -1,0 +1,61 @@
+<form [formGroup]="nwActorForm" novalidate (ngSubmit)="submitActor()" class="profile-sidebar">
+  <div class="profile-userpic">
+
+    <img [src]="avatar" class="" alt="profile-img">
+
+  </div>
+  <!-- END SIDEBAR USERPIC -->
+  <!-- SIDEBAR USER TITLE -->
+  <div class="profile-usertitle">
+    <div class="profile-usertitle-name">
+
+      <input type="text" formControlName="name"
+             [ngClass]="{'invalid':!nwActorForm.controls['name'].valid&&nwActorForm.controls['name'].touched, 'touched':nwActorForm.controls['name'].touched}"
+             placeholder="name" class="forminput">
+
+    </div>
+    <div class="profile-usertitle-job">
+
+      <input type="text" formControlName="position"
+             [ngClass]="{'invalid':!nwActorForm.controls['position'].valid&&nwActorForm.controls['position'].touched, 'touched':nwActorForm.controls['position'].touched}"
+             placeholder="postitie" class="forminput">
+
+    </div>
+  </div>
+  <div class="profile-usermenu">
+    <ul class="nav">
+      <li>
+          <span class="sidebar-part">
+            <i class="fa fa fa-envelope-o fa-lg"></i>
+          <input type="text" formControlName="email"
+                 [ngClass]="{'invalid':!nwActorForm.controls['email'].valid&&nwActorForm.controls['email'].touched, 'touched':nwActorForm.controls['email'].touched}"
+                 placeholder="email" class="forminput">
+          </span>
+      </li>
+
+      <li>
+          <span class="sidebar-part">
+            <i class="fa fa fa-phone fa-lg"></i>
+          <input type="text" formControlName="phone"
+                 [ngClass]="{'invalid':!nwActorForm.controls['phone'].valid&&nwActorForm.controls['phone'].touched, 'touched':nwActorForm.controls['phone'].touched}"
+                 placeholder="tel.nr. (min 6 cijfers)" class="forminput">
+          </span>
+      </li>
+
+      <li>
+          <span class="sidebar-part">
+            <i class="fa fa fa-sticky-note-o fa-lg"></i>
+            <textarea formControlName="notes"
+                      [ngClass]="{'invalid':!nwActorForm.controls['notes'].valid&&nwActorForm.controls['notes'].touched, 'touched':nwActorForm.controls['notes'].touched}"
+                      placeholder="notities" class="forminput"></textarea>
+          </span>
+      </li>
+
+    </ul>
+  </div>
+  <input
+    [disabled]="!nwActorForm.valid"
+    class="edit-button"
+    type="SUBMIT"
+    [value]="pService.editing ? 'Save' : 'Edit'">
+</form>

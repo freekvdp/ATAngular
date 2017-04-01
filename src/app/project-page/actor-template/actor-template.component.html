@@ -1,33 +1,31 @@
 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 pp-actorTemplate">
-  <h2 class="ata-title">{{actor.rolename}}</h2>
+  <h2 class="ata-title">{{template.rolename}}</h2>
   <div class="content">
 
     <h4>Beschrijving</h4>
-    <div class="actor-description">
-      <div [ngClass]="{'contentFound':!!actor.description, 'contentNotfound':!(!!actor.description)}">
-        <at-editable-text [content]="description"></at-editable-text>
-      </div>
+    <div class="template-content contentFound">
+        <at-editable-text [placeholder]="'description'" (newContent)="updateContent($event)" [content]="description" [editable]="!isAnalist()"></at-editable-text>
     </div>
     <h4>Personen</h4>
-    <div class="profiles-container">
-      <div *ngFor="let person of actor.persons" class="profile-container" (click)="sidebar.openSidebar(person)">
+    <div class="profiles-container template-content">
+      <div *ngFor="let person of template.persons" class="profile-container" (click)="openSidebar(person)">
         <div class="profileimg-container">
-          <img alt="profilepic" [src]="person.photo_url">
+          <img class="profileimg" alt="profilepic" [src]="person.photo_url">
         </div>
         <span class="profile-name">{{person.name}}</span>
       </div>
-      <div *ngIf="!actor.persons.length">
+      <div *ngIf="!template.persons.length">
         <span>Geen Personen toegevoegd</span>
       </div>
     </div>
-    <!--div class="button-container">
-      <button class="projectbutton" id="detailbutton" (click)="navigate()">
-        Details
+    <div class="button-container">
+      <button (click)="deleteTemplate()" [disabled]="isAnalist()" class="projectbutton" id="deletebutton">
+        Delete
       </button>
-      <button [disabled]="false" class="projectbutton" id="editbutton">
+      <button (click)="editTemplate()" [disabled]="isAnalist()" class="projectbutton" id="editbutton">
         Edit
       </button>
-    </div-->
+    </div>
   </div>
 </div>
 

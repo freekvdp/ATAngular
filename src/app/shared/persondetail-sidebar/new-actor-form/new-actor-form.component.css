@@ -1,0 +1,144 @@
+.sidenav {
+  margin-top:90px;
+  height: 100%; /* 100% Full-height */
+  position: fixed; /* Stay in place */
+  z-index: 100; /* Stay on top */
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background: #fff;
+  transition: .5s ease;
+  min-width: 250px;
+  max-width: 300px;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  font-size: 2em;
+  text-decoration: none;
+  cursor: pointer;
+
+}
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 20px 0 10px 0;
+  left:0;
+  overflow: hidden;
+}
+.profile-userpic {
+  width: 250px;
+  height: 150px;
+}
+
+.profile-userpic img {
+  display: block;
+  margin: 0 auto;
+  width: auto;
+  height: 100%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+  width: 250px;
+  padding:10px;
+}
+
+.profile-usertitle-name {
+  color: #5a7391;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+  /*padding:10px;*/
+}
+
+.profile-usertitle-job {
+  text-transform: uppercase !important;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.profile-usermenu {
+  margin-top: 30px;
+}
+.profile-usermenu ul li {
+  border-bottom: 1px solid #f0f4f7;
+  padding:10px 10px 8px 10px;
+  min-width: 250px;
+}
+
+.profile-usermenu ul li:last-child {
+  border-bottom: none;
+}
+.profile-usermenu ul li span {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+  display: block;
+}
+
+.profile-usermenu ul li span i {
+  width: 25px;
+  text-align: center;
+}
+
+.sidebar-part {
+  display:flex !important;
+  align-items: center;
+}
+
+.changepicture {
+  color: transparent;
+  position: relative;
+  top:-35px;
+  transition-duration: .3s;
+}
+.imgeditable {
+  cursor:pointer;
+}
+.profile-userpic:hover .changepicture {
+  color:black;
+  /*text-shadow: -1px 0 #323a45, 0 1px #323a45, 1px 0 #323a45, 0 -1px #323a45;*/
+}
+.edit-button {
+  width:100%;
+  color:white;
+  background-color: dodgerblue;
+  outline:0;
+  border-width: 0 0 1px 0;
+  position: absolute;
+  bottom:90px;
+  cursor: pointer;
+  transition: .3s;
+}
+.edit-button:active {
+  border: 1px solid transparent;
+}
+.edit-button:disabled {
+  /*TODO verbergen*/
+  transform: translateY(20px);
+  background-color: rgba(20, 71, 134, 0.50);
+  cursor: default;
+}
+.forminput {
+  background-color : transparent;
+  width: 200px;
+  resize:none;
+  outline : 0;
+  border: solid #323a45;
+  border-width: 0 0 1px 0;
+  transition : .2s
+}
+.touched {
+  border: none;
+}
+.invalid {
+  border:none;
+  border-bottom: 1px solid red;
+}
+

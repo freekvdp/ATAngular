@@ -1,0 +1,107 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(50, 58, 69, 0.8);
+  z-index: 999;
+}
+.logindialog {
+  z-index: 1000;
+  position: fixed;
+  margin-top: 5%;
+  right: 0;
+  left: 0;
+  height: 300px;
+  margin-right: auto;
+  margin-left: auto;
+  min-height: 200px;
+  width: 90%;
+  max-width: 520px;
+  background-color: rgba(50, 58, 69, 1);
+  overflow: hidden;
+  box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+}
+.logindialog .ata-title {
+  font-size:2em;
+  text-transform: uppercase;
+  margin-bottom:30px;
+}
+.login-part {
+  display:flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding:10px;
+}
+.login-part.buttons {
+  position: absolute;
+  bottom: 0;
+}
+.login-input {
+  max-width: 250px;
+  width: 100%;
+  color:white;
+  outline:none;
+  height: 40px;
+  font-size: 14px;
+  background-color: transparent;
+  border:none;
+  border-bottom: 1px solid #1fbba6;
+  text-transform: uppercase;
+  text-align: center;
+  transition: .3s;
+  margin-left:10px;
+}
+.login-input:focus {
+  border-bottom: 3px solid #1fbba6;
+}
+#login-pw {
+  font-size:20px !important;
+}
+.login-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  color:white;
+  text-decoration: none;
+  cursor:pointer;
+  border:3px solid;
+  border-radius: 50%;
+  transition: .2s;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+  outline: 0;
+}
+.login-button.s {
+  background-color:transparent;
+}
+.login-button.g:hover {
+  color:#EA4335;
+  box-shadow: none;
+}
+.login-button.f:hover {
+  color: #2172d6;
+  box-shadow: none;
+}
+.login-button.s:hover {
+  color: #1ad66a;
+  box-shadow: none;
+}
+.login-button.s:disabled {
+  color: #5e5e5e;
+  box-shadow: none;
+  cursor: default;
+}
+
+.login-label {
+  color:white;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+@media (min-width: 768px) {
+
+}

@@ -1,60 +1,83 @@
 /**
  * Created by Vlerkbook-pro on 21/02/2017.
  */
-import {Injectable} from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
 import {Project} from "./datamodels/project.model";
-import {projectdata} from "./shared/projects.testdata";
 import {User} from "./datamodels/user.model";
-import {userdata} from "./shared/users.testdata";
-import {Headers, RequestOptions, Http} from "@angular/http";
+import {AngularFire, FirebaseListObservable, FirebaseObjectObservable} from "angularfire2";
+import {DataService} from "./shared/data.service";
+import {ActorTemplate} from "./datamodels/actorTemplate.model";
 import {ActorPerson} from "./datamodels/actorPerson.model";
-import {Person} from "./datamodels/person.model";
-
 
 @Injectable()
-export class AppService {
+export class AppService implements OnInit{
 
-  private _projects: Project[] = projectdata;
-  private _users: User[] = userdata;
+  public projects$: FirebaseListObservable<Project[]>;
+  public templates$: FirebaseListObservable<ActorTemplate[]>;
+  public users$: FirebaseListObservable<User[]>;
   public headerTitle: string = '';
 
-  constructor(private http: Http) {
+  constructor(private af: AngularFire,
+              private dataService : DataService) {}
+
+  ngOnInit(){}
+
+  getUsers(){
+    this.users$ = this.af.database.list('/users');
+    return this.users$;
+  }
+  getProjects(){
+    this.projects$ = this.af.database.list('/projects');
+    // this.projects$.subscribe(x => console.log('projects',x));
+    return this.projects$;
+  }
+  getTemplates(){
+    this.templates$ = this.af.database.list('/templates');
+    // this.templates$.subscribe(x => console.log('templates',x));
+    return this.templates$;
   }
 
-  //firebase connectie
-
-  getProjectTestData() {
-    return Observable.of(this._projects);
+  getUser(user_id): FirebaseObjectObservable<any> {
+    return this.af.database.object('/users/' + user_id)
   }
 
-  getUserTestData() {
-    return Observable.of(this._users);
+  getProject(projectkey) :FirebaseObjectObservable<any> {
+    return this.af.database.object('/projects/' + projectkey)
   }
 
-  getUsers() {
-    return this._users;
+  isAnalist(project?:Project) {
+    if(!project)
+      return false;
+    return (project.analist_ids.indexOf(this.dataService.userid) > -1)
   }
 
-  getUser(user_id) {
-    for (let user of this._users) {
-      if (user.id === user_id) {
-        return user;
-      }
-    }
+  saveProject(project: Project) {
+    if(!!project.$key)
+      return this.projects$.update(project.$key, project);
+    else
+      return this.projects$.push(project);
+  }
+  archiveProject(project:Project) {
+      return this.af.database
+        .object(`/projects/${project.$key}/archived`)
+        .set(!project.archived)
+  }
+  saveUser(user: User) {
+    if(!!user.$key)
+      return this.users$.update(user.$key, user);
+    else
+      return this.projects$.push(user);
   }
 
-  getProject(projectname) {
-    for (let project of this._projects) {
-      if (project.name === projectname) {
-        return project;
-      }
-    }
+  saveTemplate(template : ActorTemplate) {
+    if(!!template.$key)
+      return this.templates$.update(template.$key, template);
+    else
+      return this.templates$.push(template);
   }
 
-
-//SETTING DATA
-  setActorPerson(value) {
-
+  deleteTemplate(template : ActorTemplate){
+    return this.templates$.remove(template.$key)
   }
 }

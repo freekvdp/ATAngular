@@ -68,6 +68,13 @@
 .navbar-custom .nav li.active a:hover {
   color: white;
 }
+.headerlink {
+  cursor : pointer;
+  position: absolute;
+  right: 0;
+  transform: translate3d(-35px, 15px,0);
+  transition: .2s ease-in-out;
+}
 @media (max-width: 768px) {
   #logo-img {
     width: 40px;
@@ -77,6 +84,9 @@
     -webkit-transition: background 0.3s ease-in-out;
     -moz-transition: background 0.3s ease-in-out;
     transition: background 0.3s ease-in-out;
+  }
+  .headerlink {
+    transform: translate3d(-15px, 15px,0)
   }
 }
 @media (min-width: 768px) {

@@ -1,8 +1,12 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PersondetailSidebarService} from "./persondetail-sidebar.service";
+import {AppService} from "../../app.service";
+import {Project} from "../../datamodels/project.model";
+import {AuthService} from "../auth.service";
+import {DataService} from "../data.service";
 import {ActorPerson} from "../../datamodels/actorPerson.model";
 import {User} from "../../datamodels/user.model";
-import {Person} from "../../datamodels/person.model";
-import {PersondetailSidebarService} from "./persondetail-sidebar.service";
+import {FormGroup ,FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'at-persondetail-sidebar',
@@ -11,32 +15,41 @@ import {PersondetailSidebarService} from "./persondetail-sidebar.service";
 })
 export class PersondetailSidebarComponent implements OnInit {
 
-  private person: Person;
-  private sidebarClass: string = 'closed';
+  private user: User;
+  private actor: ActorPerson;
+  private savedisabled : boolean = false;
 
-  constructor(private service: PersondetailSidebarService) {
-  }
+  constructor(private pService: PersondetailSidebarService,
+              private service: AppService,
+              private authService : AuthService,
+              public dataService: DataService) {}
 
   ngOnInit() {
-    this.service.sidebar$
-      .subscribe((person) => {
-        this.openSidebar(person)
-    });
   }
 
-  openSidebar(person): void {
-    if (person.name !== '') {
-      person.showname = person.name + ' ' + person.surname;
-      this.person = person;
-      this.sidebarClass = 'opened';
-      document.getElementById("content").style.marginLeft = "250px";
+  //slaat de veranderingen tijdelijk op, dit wordt niet opgeslagen in de db
+  //totdat er op "save" wordt geklikt en 'changeEditing wordt aangeroepen
+  updateContent(event) {
+    this.pService.person[event[1]] = event[0];
+    this.pService.savePerson()
+  }
+
+  // Hier wordt de data opgeslagen mits er op 'save' wordt geklikt
+  changeEditing() {
+    if(this.pService.editing) {
+      this.pService.savePerson();
     }
+    this.pService.editing = !this.pService.editing;
   }
 
-  closeSideBar(): void {
-    //if (this.sidebarClass !== 'closed') {
-    this.sidebarClass = 'closed';
-    document.getElementById("content").style.marginLeft = "0";
-    //}
+  // Een ingelogd persoon mag altijd zijn eigen data wijzigen, voor elke andere
+  // Wijziging moet de persoon een analist zijn van het project.
+  isAnalist() {
+    if(this.user){
+      console.log(this.user);
+      if (this.user.id === this.dataService.userid)
+        return true;
+    } else
+      return this.service.isAnalist(this.dataService.project);
   }
 }

@@ -51,3 +51,10 @@
 #detailbutton {
   background-color: #14b9d6;
 }
+.archived {
+  opacity: .2;
+  z-index: 100;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}

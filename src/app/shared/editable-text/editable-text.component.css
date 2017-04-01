@@ -3,7 +3,7 @@
   justify-content: space-between;
 }
 
-.editable-content {
+.editable-contentarea {
   width:100%;
   min-height: 30px;
   max-height: 100px;
@@ -14,13 +14,23 @@
   resize:none;
   overflow: auto;
 }
-.editcontent {
+.editable-contentinput {
+  width:100%;
+  padding:5px;
+  border:none;
+  border-bottom:1px solid transparent;
+  outline:none;
+  transition: .5s;
+}
+.editcontentarea {
   border-color:#323a45;
-  min-height: 100px;
+}
+.editcontentinput {
+  border-color: #323a45;
 }
 .change-button {
   width:50px;
-  height: 50px;
+  /*height: 50px;*/
   font-size:1.5em;
   display: flex;
   justify-content: center;

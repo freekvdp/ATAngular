@@ -1,10 +1,8 @@
 .closed {
-  min-width:0;
-  max-width: 0;
+  transform: translateX(-300px);
 }
 .opened {
-  min-width:250px;
-  max-width: 300px;
+  transform: translateX(0);
 }
 /* Profile container */
 .profile {
@@ -15,12 +13,14 @@
   margin-top:90px;
   height: 100%; /* 100% Full-height */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
+  z-index: 100; /* Stay on top */
   top: 0;
   left: 0;
   overflow: hidden;
   background: #fff;
-  transition: .5s ease-out;
+  transition: .5s ease;
+  min-width: 250px;
+  max-width: 300px;
 }
 .sidenav .closebtn {
   position: absolute;
@@ -56,6 +56,7 @@
   text-align: center;
   margin-top: 20px;
   width: 250px;
+  padding:10px;
 }
 
 .profile-usertitle-name {
@@ -63,38 +64,18 @@
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 7px;
+  /*padding:10px;*/
 }
 
 .profile-usertitle-job {
-  text-transform: uppercase;
+  text-transform: uppercase !important;
   color: #5b9bd1;
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 15px;
 }
-
-.profile-userbuttons {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.profile-userbuttons .btn {
-  text-transform: uppercase;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 6px 15px;
-  margin-right: 5px;
-}
-
-.profile-userbuttons .btn:last-child {
-  margin-right: 0px;
-}
-
 .profile-usermenu {
   margin-top: 30px;
-}
-.profile-usermenu {
-
 }
 .profile-usermenu ul li {
   border-bottom: 1px solid #f0f4f7;
@@ -115,4 +96,61 @@
 .profile-usermenu ul li span i {
   width: 25px;
   text-align: center;
+}
+
+.sidebar-part {
+  display:flex !important;
+  align-items: center;
+}
+
+.changepicture {
+  color: transparent;
+  position: relative;
+  top:-35px;
+  transition-duration: .3s;
+}
+.imgeditable {
+  cursor:pointer;
+}
+.profile-userpic:hover .changepicture {
+  color:black;
+  /*text-shadow: -1px 0 #323a45, 0 1px #323a45, 1px 0 #323a45, 0 -1px #323a45;*/
+}
+.sidebarbuttons {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  bottom:90px;
+  width: 100%;
+}
+.sidebar-button {
+  width:100%;
+  color:white;
+  outline:0;
+  border-width: 0 0 1px 0;
+  cursor: pointer;
+  transition: .3s;
+  text-align: center;
+}
+.edit-button {
+  background-color: dodgerblue;
+}
+.delete-button {
+  background-color: red;
+  -webkit-transform: translateY(26px);
+  -moz-transform: translateY(26px);
+  -ms-transform: translateY(26px);
+  -o-transform: translateY(26px);
+  transform: translateY(26px);
+  z-index: -1;
+}
+.delete-button:active, .delete-button:active {
+  border: 1px solid transparent;
+}
+.delete-button:disabled {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
 }

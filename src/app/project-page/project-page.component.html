@@ -1,3 +1,29 @@
-<div class="row list-container">
-  <at-actor-template *ngFor="let actor of project.actors" [actor]="actor"></at-actor-template>
+<div class="list-container">
+
+  <!--BACK BUTTON-->
+  <a class="back-button" [routerLink]="['/home']">
+    <i class="fa fa-arrow-left fa-2x"></i>
+  </a>
+
+  <at-actor-template
+    *ngFor="let template of templates$ | async"
+    (edittemplate)="onEditTemplate($event)"
+    [template]="template">
+  </at-actor-template>
+
+  <at-add-element *ngIf="service.isAnalist(dataService.project)" (click)="onDialogOpen()" [type]="'template'">
+  </at-add-element>
+
+  <at-dialog [(visible)]="dialogOpen"
+             class="template-dialog"
+             [type]="'Template'"
+             [title]="'Nieuw Actor Template'">
+
+    <at-new-actor-template
+      [editing]="editing"
+      [nwtemplate]="editTemplate"
+      (hide)="closeDialog($event)">
+    </at-new-actor-template>
+
+  </at-dialog>
 </div>

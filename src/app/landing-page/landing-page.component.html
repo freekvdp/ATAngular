@@ -1,3 +1,37 @@
-<div class="row list-container">
-  <at-project *ngFor="let project of projects" [project]="project"></at-project>
+<div class="list-container">
+  <div class="archivedswitch pull-right">
+    <label class="switch">
+      <input [(ngModel)]="showArchived" type="checkbox" class="toggle-archived-button">
+      <div class="slider round"></div>
+    </label><br>
+    <span>Show Archive</span>
+  </div>
+  <div class="actual-projects">
+    <at-project
+      *ngFor="let project of projects$ | async"
+      [project]="project"
+      (editproject)="onEditProject($event)">
+    </at-project>
+
+    <at-add-element (click)="onDialogOpen()" [type]="'project'">
+    </at-add-element>
+  </div>
+
+  <div class="archived-projects" *ngIf="showArchived">
+    <at-project
+      class="archived-project"
+      *ngFor="let project of archivedProjects$ | async"
+      [project]="project">
+    </at-project>
+  </div>
+
+  <at-dialog [(visible)]="dialogOpen" [type]="'Project'" [title]="'Nieuw Project'">
+
+    <at-new-project
+      [editing]="editing"
+      [project]="editproject"
+      (hide)="closeDialog($event)">
+    </at-new-project>
+
+  </at-dialog>
 </div>

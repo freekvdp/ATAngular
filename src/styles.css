@@ -1,12 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 html body {
   font-family: 'Signika', sans-serif;
-  /*background-color: #eaedf1;*/
   background: url("assets/Background/bg.jpg") no-repeat left top fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+.fullwidth {
+  width: 100%;
 }
 .ata-title {
   text-align: center;
@@ -14,6 +16,7 @@ html body {
   color:white;
   margin:0;
   padding:15px 0 10px 0;
+  text-transform: capitalize;
 }
 .profiles-container {
   display:flex;
@@ -24,8 +27,9 @@ html body {
   text-align: center;
   cursor: pointer;
 }
-.profile-container img {
+.profileimg-container .profileimg {
   height: 80px;
+  width: 80px;
   border-radius: 50%;
   border:2px solid #323a45;
 }
@@ -36,18 +40,11 @@ html body {
   transition-duration: .3s;
 }
 .list-container {
-  margin-left:50px !important;
-  margin-right:50px !important;
-  /*width:90%;
-  display:flex;
-  flex-wrap: wrap;
-  justify-content: space-between;*/
+  margin-left:50px;
+  margin-right:50px;
 }
 .contentFound{
   height:100px;
-  /*display: flex;*/
-  /*align-items: center;*/
-  /*font-style: italic;*/
   color: #323a45;
 }
 .contentNotfound {
@@ -56,4 +53,11 @@ html body {
   align-items: center;
   font-style: italic;
   color: #323a45;
+}
+
+@media (max-width: 785px) {
+  .list-container {
+    margin-left:10px;
+    margin-right:10px;
+  }
 }

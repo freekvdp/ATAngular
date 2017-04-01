@@ -1,0 +1,53 @@
+<button id="prev-button"
+        class="nw-template-button"
+        *ngIf="movefilm!=0"
+        (click)="onPrevious()">
+  <i class="fa fa-arrow-circle-left fa-2x"></i>
+</button>
+<div class="filmstrip" [ngStyle]="{'transform': 'translateX(-'+movefilm+'%)'}">
+  <div id="templatename" class="filmstrip-part">
+    <label for="nwtemplate-name" class="input-label">Rolnaam:</label>
+    <input type="text"
+           tabindex="-1"
+           [(ngModel)]="nwtemplate.rolename"
+           class="input-text"
+           id="nwtemplate-name"
+           autofocus/>
+  </div>
+  <div id="templatedesc" class="filmstrip-part">
+    <label for="nwtemplate-desc" class="input-label">Omschrijving:</label>
+    <textarea class="input-text input-textarea"
+              autosize
+              tabindex="-1"
+              [(ngModel)]="nwtemplate.description"
+              id="nwtemplate-desc"></textarea>
+  </div>
+  <div id="projectanalists" class="filmstrip-part">
+    <h2 class="item-title">Add persons</h2>
+    <div class="profiles-container">
+
+      <div *ngFor="let person of sidebar.nwActors" class="profile-container person-rond" (click)="openSidebar(person)">
+        <div class="actorimg-container">
+          <img class="actorimg" alt="profilepic" [src]="person.photo_url">
+        </div>
+        <span class="actor-name">{{person.name}}</span>
+      </div>
+
+      <button class="nwpersoon-button person-rond"
+              tabindex="-1"
+              (click)="onNewPerson()">+</button>
+    </div>
+  </div>
+</div>
+<button id="next-button"
+        class="nw-template-button"
+        *ngIf="movefilm!=66.6"
+        (click)="onNext()">
+  <i class="fa fa-arrow-circle-right fa-2x"></i>
+</button>
+<button id="finish-button"
+        class="nw-template-button"
+        [disabled]="movefilm!=66.6 || nwtemplate.rolename === ''"
+        (click)="onSubmit()">
+  <i class="fa fa-check-circle fa-2x"></i>
+</button>

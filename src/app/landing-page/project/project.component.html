@@ -1,27 +1,28 @@
 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 lp-project">
+  <div *ngIf="project.archived" (click)="archive()" class="archived"></div>
   <div class="projectcontent">
     <h2 class="ata-title">{{project.name}}</h2>
     <h4>Analisten</h4>
     <div class="profiles-container">
-      <a *ngFor="let analist of analists" class="profile-container" (click)="sidebar.openSidebar(analist)">
+      <a *ngFor="let analist of analistsFiltered$ | async" class="profile-container" (click)="openSidebar(analist)">
         <div class="profileimg-container">
-          <img alt="profilepic" [src]="analist.photo_url">
+          <img class="profileimg" alt="profilepic" [src]="analist.photo_url">
         </div>
         <span class="profile-name">{{analist.name}}</span>
       </a>
-      <div *ngIf="!analists.length" class="contentNotfound">
-        <span>Geen Analist toegevoegd.</span>
-      </div>
+      <!--<div *ngIf="!analists.length" class="contentNotfound">-->
+        <!--<span>Geen Analist toegevoegd.</span>-->
+      <!--</div>-->
     </div>
     <h4>Teamleden</h4>
     <div class="profiles-container">
-      <a *ngFor="let member of members" class="profile-container" (click)="sidebar.openSidebar(member)">
+      <a *ngFor="let member of membersFiltered$ | async" class="profile-container" (click)="openSidebar(member)">
         <div class="profileimg-container">
-          <img alt="profilepic" [src]="member.photo_url">
+          <img class="profileimg" alt="profilepic" [src]="member?.photo_url">
         </div>
-        <span class="profile-name">{{member.name}}</span>
+        <span class="profile-name">{{member?.name}}</span>
       </a>
-      <div *ngIf="!members.length" class="contentNotfound">
+      <div *ngIf="noMember()" class="contentNotfound">
         <span>Geen Teamlid toegevoegd</span>
       </div>
     </div>
@@ -29,7 +30,7 @@
       <button class="projectbutton" id="detailbutton" (click)="navigate()">
         Details
       </button>
-      <button [disabled]="false" class="projectbutton" id="editbutton">
+      <button (click)="editProject()" [disabled]="isAnalist()" class="projectbutton" id="editbutton">
         Edit
       </button>
     </div>

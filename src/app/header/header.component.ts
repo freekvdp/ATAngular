@@ -1,4 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
+import {AppService} from "../app.service";
+import {AuthService} from "../shared/auth.service";
 
 @Component({
   selector: 'at-header',
@@ -8,7 +10,8 @@ import {Component, OnInit, Input} from '@angular/core';
 export class HeaderComponent implements OnInit {
   @Input() title:string;
 
-  constructor() { }
+  constructor(private service:AppService,
+              public authService:AuthService) { }
 
   ngOnInit() {
   }

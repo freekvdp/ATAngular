@@ -1,0 +1,75 @@
+<button id="prev-button"
+        class="nw-project-button"
+        *ngIf="movefilm!=0"
+        (click)="onPrevious()">
+  <i class="fa fa-arrow-circle-left fa-2x"></i>
+</button>
+<div class="filmstrip"
+     [ngStyle]="{'transform': 'translateX(-'+movefilm+'%)'}">
+  <div id="projectname" class="filmstrip-part">
+    <label for="nwproject-name" id="name-label">Naam:</label>
+    <input type="text"
+           [(ngModel)]="project.name"
+           id="nwproject-name"
+           tabindex="-1"
+           autofocus/>
+  </div>
+  <div id="projectanalists" class="filmstrip-part">
+    <h2 class="item-title">Analisten</h2>
+    <ul class="userlist">
+      <li *ngFor="let user of users$ | async; let i = index">
+        <div class="profileimg-container" (click)="openSidebar(user)">
+          <img class="profileimg" alt="profilepic" [src]="user.photo_url">
+        </div>
+        <div class="checkbox checkbox-warning checkbox-circle">
+          <input
+            type="checkbox"
+            tabindex="-1"
+            [checked]="isChecked(user.id, 'analist')"
+            (change)="updateChecked(user.id,'analist')">
+          <label>
+            {{user.name}} {{user.surname}} | {{user.position}}
+          </label>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="projectmembers" class="filmstrip-part">
+    <h2 class="item-title">Teamleden</h2>
+    <ul class="userlist">
+      <li *ngFor="let user of users$ | async; let i = index">
+        <div class="profileimg-container" (click)="openSidebar(user)">
+          <img class="profileimg" alt="profilepic" [src]="user.photo_url">
+        </div>
+        <div class="checkbox checkbox-warning checkbox-circle">
+          <input type="checkbox"
+                 tabindex="-1"
+                 [checked]="isChecked(user.id, 'member')"
+                 (change)="updateChecked(user.id,'member')">
+          <label>
+            {{user.name}} {{user.surname}} | {{user.position}}
+          </label>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<button id="next-button"
+        class="nw-project-button"
+        *ngIf="movefilm!=66.6"
+        (click)="onNext()">
+  <i class="fa fa-arrow-circle-right fa-2x"></i>
+</button>
+<button id="archive-button"
+        *ngIf="project.$key"
+        class="nw-project-button"
+        [disabled]="movefilm!=0"
+        (click)="onArchive()">
+  Archiveer
+</button>
+<button id="finish-button"
+        class="nw-project-button"
+        [disabled]="movefilm!=66.6 || project.name==='' || project?.analist_ids.length==0"
+        (click)="onSubmit()">
+  <i class="fa fa-check-circle fa-2x"></i>
+</button>

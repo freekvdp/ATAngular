@@ -5,7 +5,8 @@ import {ActorTemplate} from "./actorTemplate.model";
 
 export interface Project {
   name : string,
+  $key? : string,
   analist_ids : string[],
   member_ids : string[],
-  actors : ActorTemplate[]
+  archived : boolean;
 }

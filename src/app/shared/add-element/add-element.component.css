@@ -1,0 +1,54 @@
+#addElement {
+  height:385px;
+  width: 300px;
+  margin:20px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  text-decoration: none;
+  color:rgba(198, 198, 198, 0.33);
+  transition: .3s;
+  border-radius: 2%;
+  border:1px groove rgba(198, 198, 198, 0.33);
+}
+
+#addElement span {
+  text-align: center;
+  width: 100%;
+}
+
+#addElement:hover {
+  color:rgba(198, 198, 198, 0.2);
+  cursor:pointer;
+  border-color:rgba(198, 198, 198, 0.66);
+}
+
+#addElement:hover #plus {
+  font-size:0em;
+}
+
+#plus {
+  position: absolute;
+  font-size: 4em;
+  transition:.25s ease-out;
+}
+
+#nieuw {
+  color:transparent;
+  transform: translate3d(0,35px,0);
+  font-size: 3em;
+}
+
+#type {
+  color:transparent;
+  transform: translate3d(0,-15px,0);
+  font-size: 3em;
+}
+
+.appear {
+  color:rgba(198, 198, 198, 0.66) !important;
+  transform: translate3d(0,5px,0) !important;
+  transition:.25s ease-out;
+}

@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, OnDestroy} from '@angular/core';
+import {Component, OnInit, Input, OnDestroy, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'at-editable-text',
@@ -6,11 +6,20 @@ import {Component, OnInit, Input, OnDestroy} from '@angular/core';
     <div class="editable-container">
       <textarea 
       autosize
-      [placeholder]="placeholder" 
-      [readonly]="!_editing" 
-      [(ngModel)]="content" 
-      [ngClass]="{editcontent:_editing}"
-      class="editable-content">{{content}}</textarea>
+      *ngIf="area"
+      [placeholder]="placeholder"
+      [readonly]="!_editing"
+      [(ngModel)]="content"
+      [ngClass]="{editcontentarea:_editing}"
+      class="editable-contentarea">{{content}}</textarea>
+      <input 
+      *ngIf="!area"
+      type="text"
+      [readonly]="!_editing"
+      [(ngModel)]="content"
+      class="editable-contentinput"
+      [ngClass]="{editcontentinput:_editing}"
+      [placeholder]="placeholder">   
       <div *ngIf="editable" class="change-button">
         <a (click)="changeEditing()"><i [ngClass]="editbutton" class="fa"></i></a>
       </div>
@@ -23,6 +32,8 @@ export class EditableTextComponent implements OnInit, OnDestroy {
   @Input() editable = true;
   @Input() content;
   @Input() placeholder = 'No content added';
+  @Input() area:boolean = true;
+  @Output() newContent:EventEmitter<[string,string]> = new EventEmitter<[string,string]>()
   private _editing: boolean = false;
   private editbutton = 'fa-pencil';
 
@@ -41,6 +52,8 @@ export class EditableTextComponent implements OnInit, OnDestroy {
   }
 
   changeEditing() {
+    if(this._editing)
+      this.newContent.emit([this.content,this.placeholder]);
     this._editing = !this._editing;
     this.editbutton = !this._editing ? 'fa-pencil' : 'fa-check-circle-o fa-lg';
     //icon-ok-circle

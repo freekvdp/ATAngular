@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import {Project} from "./datamodels/project.model";
 
 @Component({
   selector: 'at-root',
@@ -6,4 +8,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor() { }
 }

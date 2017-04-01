@@ -1,9 +1,13 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Project} from "../../datamodels/project.model";
 import {User} from "../../datamodels/user.model";
 import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
 import {PersondetailSidebarService} from "../../shared/persondetail-sidebar/persondetail-sidebar.service";
+import {Observable} from "rxjs";
+
+import "rxjs/add/operator/do";
+import "rxjs/add/operator/filter";
 
 @Component({
   selector: 'at-project',
@@ -11,32 +15,69 @@ import {PersondetailSidebarService} from "../../shared/persondetail-sidebar/pers
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent implements OnInit {
-  @Input() project:Project;
-  analists : User[] = [];
-  members : User[] = [];
 
+  @Input() project: Project;
+  @Output() editproject: EventEmitter<Project> = new EventEmitter<Project>();
+  users$: Observable<User[]>;
+  analistsFiltered$: Observable<User[]>;
+  membersFiltered$: Observable<User[]>;
 
-  constructor(
-    private appService:AppService,
-    private router:Router,
-    private sidebar:PersondetailSidebarService
-  ) { }
+  constructor(private service: AppService,
+              private router: Router,
+              private sidebar: PersondetailSidebarService) {
+  }
 
   ngOnInit() {
-    this.setPeople(this.project.analist_ids,this.project.member_ids);
+    this.users$ = this.service.getUsers();
+    this.getAnalists();
+    this.getMembers();
   }
 
-  setPeople(analist_ids:string[], member_ids:string[]){
-    for(let i = 0; i < analist_ids.length; i++){
-      let newanalist:User = this.appService.getUser(analist_ids[i]);
-      this.analists.push(newanalist);
-    }
-    for(let i = 0; i < member_ids.length; i++){
-      let newmember:User = this.appService.getUser(member_ids[i]);
-      this.members.push(newmember);
-    }
+  getAnalists() {
+    this.analistsFiltered$ = this.users$.map(
+      users => this.filterAnalists(users)
+    )
   }
+  getMembers() {
+    this.membersFiltered$ = this.users$.map(
+      users => this.filterMembers(users)
+    )
+  }
+
+  filterAnalists(users: User[]) : User[] {
+    return users.filter(user => {
+      return this.project.analist_ids.indexOf(user.id) >= 0; //returned boolean
+    })
+  }
+  filterMembers(users: User[]) : User[] {
+    return users.filter(user => {
+      return this.project.member_ids.indexOf(user.id) >= 0; //returned boolean
+    })
+  }
+  noMember():boolean{
+    let count = 0;
+    for(let member of this.project.member_ids){
+      count +=member.length
+    }
+    return count < 1
+  }
+
+  editProject() {
+    this.editproject.emit(this.project);
+  }
+
   navigate() {
-    this.router.navigate(['/projects', this.project.name]);
+    this.router.navigate(['/projects', this.project.$key]);
+  }
+
+  openSidebar(user) {
+    this.sidebar.setPerson(user);
+  }
+  isAnalist():boolean{
+    let analist = this.service.isAnalist(this.project);
+    return !analist;
+  }
+  archive(){
+    this.service.archiveProject(this.project);
   }
 }

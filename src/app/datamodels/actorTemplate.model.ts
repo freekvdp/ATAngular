@@ -5,6 +5,8 @@ import {ActorPerson} from "./actorPerson.model";
 
 export interface ActorTemplate {
   rolename : string,
+  $key? : string,
   description : string,
-  persons : ActorPerson[]
+  persons : ActorPerson[],
+  project_key : string
 }
