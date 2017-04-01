@@ -19,11 +19,12 @@ html body {
   text-transform: capitalize;
 }
 .profiles-container {
+  overflow-x: scroll;
   display:flex;
   margin: 0 10px 0 10px;
 }
 .profile-container {
-  width: 90px;
+  margin-right: 10px;
   text-align: center;
   cursor: pointer;
 }
